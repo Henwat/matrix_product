@@ -19,17 +19,17 @@ public class GridParser {
     }
 
 
-    public long[][] gridParser() {
+    public int[][] gridParser() {
         Path path = Paths.get(gridURI);
-        long[][] grid = new long[numRows][numCols]; //Use long to account for large products
+        int[][] grid = new int[numRows][numCols];
 
         try(BufferedReader reader = Files.newBufferedReader(path)) {
             String line;
 
             int index = 0;
             while( (line = reader.readLine()) != null) {
-                long[] row = Stream.of(line.split(" "))
-                        .mapToLong(Long::parseLong)
+                int[] row = Stream.of(line.split(" "))
+                        .mapToInt(Integer::parseInt)
                         .toArray();
                 grid[index] = row;
                 index++;
