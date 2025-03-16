@@ -1,4 +1,3 @@
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,15 +11,20 @@ public class GridParser {
     private final int numRows;
     private final int numCols;
 
-    public GridParser(String puzzleURI, int numRows, int numCols) {
-        this.gridURI = puzzleURI;
+    public GridParser(String gridURI, int numRows, int numCols) throws IOException {
+        if(!checkIfValidPath(gridURI)) {
+            throw new IOException("The file does not exist.");
+        }
+
+        this.gridURI = gridURI;
         this.numRows = numRows;
         this.numCols = numCols;
     }
 
 
-    public int[][] gridParser() {
+    public int[][] gridParser() throws IOException {
         Path path = Paths.get(gridURI);
+
         int[][] grid = new int[numRows][numCols];
 
         try(BufferedReader reader = Files.newBufferedReader(path)) {
@@ -41,5 +45,12 @@ public class GridParser {
         }
 
         return grid;
+    }
+
+    private boolean checkIfValidPath(Path path) {
+        if(!Files.exists(path) || Files.size(path) == 0) {
+            return false;
+        }
+        return true;
     }
 }
