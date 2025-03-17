@@ -19,7 +19,6 @@ public class Main {
         product.forEach(System.out::println); //Product: 93168306
 
         //Solving the task
-
         Path gridPath2 = Paths.get("src/main/resources/grid.txt");
         int kConsecutiveNumbers2 = 4;
         int[][] grid2 = GridParser.parse(gridPath2);

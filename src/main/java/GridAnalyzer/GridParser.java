@@ -32,7 +32,7 @@ public class GridParser {
 
             int index = 0;
             while( (line = reader.readLine()) != null) {
-                int[] row = Stream.of(line.split(" "))
+                int[] row = Stream.of(line.split("\\s+"))
                         .mapToInt(Integer::parseInt)
                         .toArray();
                 grid[index] = row;
