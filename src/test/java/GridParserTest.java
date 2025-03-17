@@ -9,13 +9,4 @@ import static org.junit.jupiter.api.Assertions.*;
 @Disabled
 class GridParserTest {
 
-
-    @Test
-    void testWithEmptyPath() {
-        String gridURI = "";
-    }
-
-
-
-
 }
