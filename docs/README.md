@@ -9,7 +9,7 @@ The **GridAnalyzer** package contains classes to parse and find the largest prod
   
 - *GridSolver* finds the largest product of *k* consecutive numbers in an *n* x *n* matrix. Results are returned as a list of GridProducts.
   - The static method *solve()* takes an int[][] *grid*, and an int *kConsecutive* of the number of consecutive numbers,  as input.   
-  - The consecutive numbers can either be horizontal, vertical or diagonal (North East to South West, or North West to South East) - see illustration below.
+  - The *k* consecutive numbers can either be horizontal, vertical or diagonal (North East to South West, or North West to South East) - see illustration below (*k* = 4).
 
 
 <img src="illustration.png" alt="How consecutive numbers are calculated" width="300" height="250" />
