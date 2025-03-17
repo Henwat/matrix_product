@@ -1,14 +1,18 @@
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-//        String gridURL = "src/main/resources/grid.txt";
-//        GridParser gridParser = new GridParser(gridURI, 20, 20);
-//        int[][] grid = gridParser.gridParser();
-//
-//        GridSolver gridSolver = new GridSolver(4, grid);
-//        List<GridProduct> gridProduct = gridSolver.solve();
-//        System.out.println(gridProduct);
-    }
+        Path gridPath = Paths.get("src/test/resources/test.txt");
+        int nConsecutiveNumbers = 4;
 
+        int[][] grid = GridParser.parse(gridPath);
+
+        List<GridProduct> product = GridSolver.solve(grid, nConsecutiveNumbers);
+        for (GridProduct p : product) {
+            System.out.println(p);
+        }
+    }
 }

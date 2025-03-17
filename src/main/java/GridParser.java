@@ -4,30 +4,27 @@ import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class GridParser {
-    private final String gridURI;
-    private final int numRows;
-    private final int numCols;
 
-    public GridParser(String gridURI, int numRows, int numCols) throws IOException {
-        if(!checkIfValidPath(gridURI)) {
-            throw new IOException("The file does not exist.");
+    public static int[][] parse(Path gridPath) {
+        // Validation checks
+        try {
+            validateGrid(gridPath);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
-        this.gridURI = gridURI;
-        this.numRows = numRows;
-        this.numCols = numCols;
-    }
 
+        // Note: Matrix is confirmed as a square matrix above
+        int dim = getGridDimensions(gridPath);
 
-    public int[][] gridParser() throws IOException {
-        Path path = Paths.get(gridURI);
+        int[][] grid = new int[dim][dim];
 
-        int[][] grid = new int[numRows][numCols];
-
-        try(BufferedReader reader = Files.newBufferedReader(path)) {
+        try(BufferedReader reader = Files.newBufferedReader(gridPath)) {
             String line;
 
             int index = 0;
@@ -38,8 +35,6 @@ public class GridParser {
                 grid[index] = row;
                 index++;
             }
-        } catch (NoSuchFileException e) {
-            System.out.println("File not found");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -47,10 +42,40 @@ public class GridParser {
         return grid;
     }
 
-    private boolean checkIfValidPath(Path path) {
-        if(!Files.exists(path) || Files.size(path) == 0) {
-            return false;
+    private static void validateGrid(Path gridPath) throws IOException {
+        if(Files.notExists(gridPath)) {
+            throw new NoSuchFileException(gridPath.toString());
         }
-        return true;
+        if(Files.size(gridPath) == 0) {
+            throw new IllegalArgumentException("Grid file is empty");
+        }
+        if(!checkIfGridIsSquare(gridPath)) {
+            throw new IllegalArgumentException("Grid is not a square");
+        }
+    }
+
+    private static boolean checkIfGridIsSquare(Path path) throws IOException {
+        List<String> grid = Files.readAllLines(path);
+
+        if (grid.isEmpty()) return false;
+
+        int rowDim = grid.size();
+        int colDim = grid.getFirst().split("\\s+").length;
+
+        //checks if the rows are equal size.
+        for (String line : grid) {
+            if (line.split("\\s+").length != colDim) return false;
+        }
+        return rowDim == colDim;
+    }
+
+    private static int getGridDimensions(Path path) {
+        List<String> grid = new ArrayList<>();
+        try {
+            grid = Files.readAllLines(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return grid.size();
     }
 }

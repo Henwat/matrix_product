@@ -2,22 +2,22 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GridSolver {
-    int nConsecutive;
-    int[][] grid;
-
-    public GridSolver(int nConsecutive, int[][] grid) {
-        if(!isSquare(grid)) {
-            throw new IllegalArgumentException("Grid must be square");
-        }
-        if(!consecutiveNumbersLessOrEqualDim(grid, nConsecutive)) {
-            throw new IllegalArgumentException("Consecutive numbers must not surpass the dimensions of the matrix");
-        }
-
-        this.nConsecutive = nConsecutive;
-        this.grid = grid;
+    private GridSolver() {
     }
 
-    public List<GridProduct> solve() {
+    public static List<GridProduct> solve(int[][] grid, int nConsecutive) {
+        //validation check
+        if(nConsecutive == 0) {
+            throw new IllegalArgumentException("nConsecutive should be greater than 0");
+        }
+        if(!checkIfGridIsValid(grid)) {
+            throw new IllegalArgumentException("Grid is not valid");
+        }
+        if(!checkIfConsecutiveNumbersLessOrEqualDim(grid, nConsecutive)) {
+            throw new IllegalArgumentException("Consecutive numbers must be less than or equal to the dimension");
+        }
+
+
         int rowDim = grid.length;
         int colDim = grid[0].length;
         long maxProd = 0;
@@ -44,7 +44,7 @@ public class GridSolver {
                         maxProducts.clear();
                         maxProducts.add(new GridProduct(currentProd, coordinates, factors));
 
-                    } else if (currentProd == maxProd) {
+                    } else if (maxProd != 0 && currentProd == maxProd) {
                         maxProducts.add(new GridProduct(currentProd, coordinates, factors));
                     }
                 }
@@ -67,7 +67,7 @@ public class GridSolver {
                         maxProducts.clear();
                         maxProducts.add(new GridProduct(currentProd, coordinates, factors));
 
-                    } else if (currentProd == maxProd) {
+                    } else if (maxProd != 0 && currentProd == maxProd) {
                         maxProducts.add(new GridProduct(currentProd, coordinates, factors));
                     }
                 }
@@ -90,14 +90,14 @@ public class GridSolver {
                         maxProducts.clear();
                         maxProducts.add(new GridProduct(currentProd, coordinates, factors));
 
-                    } else if (currentProd == maxProd) {
+                    } else if (maxProd != 0 && currentProd == maxProd) {
                         maxProducts.add(new GridProduct(currentProd, coordinates, factors));
                     }
                 }
 
 
                 //NE to SW product of numConsecutive numbers
-                if((col - nConsecutive - 1 >= 0) && (row + nConsecutive - 1 < rowDim)) {
+                if((col - nConsecutive + 1 >= 0) && (row + nConsecutive - 1 < rowDim)) {
                     long currentProd = 1;
                     int[][] coordinates = new int[nConsecutive][2];
                     int[] factors = new int[nConsecutive];
@@ -113,7 +113,7 @@ public class GridSolver {
                         maxProducts.clear();
                         maxProducts.add(new GridProduct(currentProd, coordinates, factors));
 
-                    } else if (currentProd == maxProd) {
+                    } else if (maxProd != 0 && currentProd == maxProd) {
                         maxProducts.add(new GridProduct(currentProd, coordinates, factors));
                     }
                 }
@@ -122,18 +122,14 @@ public class GridSolver {
         return maxProducts;
     }
 
-    private boolean isSquare(int[][] grid) {
-        if (grid == null) return false;
-        int rowDim = grid.length;
-
-        for (int[] row : grid) {
-            int colDim = row.length;
-            if (colDim != rowDim) return false;
-        }
-        return true;
+    private static boolean checkIfConsecutiveNumbersLessOrEqualDim(int[][] grid, int numConsecutive) {
+        return grid.length >= numConsecutive;
     }
 
-    private boolean consecutiveNumbersLessOrEqualDim(int[][] grid, int numConsecutive) {
-        return grid.length >= numConsecutive;
+    private static boolean checkIfGridIsValid(int[][] grid) {
+        if (grid == null) return false;
+        if(grid.length == 0) return false;
+        if(grid[0].length == 0) return false;
+        return true;
     }
 }
