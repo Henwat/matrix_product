@@ -8,18 +8,19 @@ public class GridSolver {
     }
 
     public static List<GridProduct> solve(int[][] grid, int kConsecutive) {
-        //validation check
-        if(kConsecutive == 0) {
-            throw new IllegalArgumentException("kConsecutive should be greater than 0");
-        }
+        //Validating grid and kConsecutive
         if(!checkIfGridIsValid(grid)) {
             throw new IllegalArgumentException("Grid is not valid");
+        }
+        if(kConsecutive == 0) {
+            throw new IllegalArgumentException("kConsecutive should be greater than 0");
         }
         if(!checkIfConsecutiveNumbersLessOrEqualDim(grid, kConsecutive)) {
             throw new IllegalArgumentException("Consecutive numbers must be less than or equal to the dimension");
         }
 
 
+        //Find the largest product in the matrix
         int rowDim = grid.length;
         int colDim = grid[0].length;
         long maxProd = 0;
