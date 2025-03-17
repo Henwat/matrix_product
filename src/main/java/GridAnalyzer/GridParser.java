@@ -11,6 +11,8 @@ import java.util.stream.Stream;
 
 public class GridParser {
 
+    private GridParser() {}
+
     public static int[][] parse(Path gridPath) {
         // Validation checks
         try {
@@ -19,12 +21,12 @@ public class GridParser {
             e.printStackTrace();
         }
 
-
-        // Note: Matrix is confirmed as a square matrix above
+        // Get the dimensions. The matrix is assumed to be square.
         int dim = getGridDimensions(gridPath);
 
         int[][] grid = new int[dim][dim];
 
+        //parse grid/matrix
         try(BufferedReader reader = Files.newBufferedReader(gridPath)) {
             String line;
 
@@ -50,12 +52,12 @@ public class GridParser {
         if(Files.size(gridPath) == 0) {
             throw new IllegalArgumentException("Grid file is empty");
         }
-        if(!checkIfGridIsSquare(gridPath)) {
+        if(!isSquare(gridPath)) {
             throw new IllegalArgumentException("Grid is not a square");
         }
     }
 
-    private static boolean checkIfGridIsSquare(Path path) throws IOException {
+    private static boolean isSquare(Path path) throws IOException {
         List<String> grid = Files.readAllLines(path);
 
         if (grid.isEmpty()) return false;

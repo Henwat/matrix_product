@@ -10,6 +10,6 @@ public record GridProduct(long maxProd, int[][] coordinates, int[] factors) {
         return "Product: " + maxProd +
                 "\nFactors: " + Arrays.toString(factors) +
                 "\nCoordinates: " + Arrays.deepToString(coordinates) +
-                "\n *Coordinates are in same order as the factors";
+                "\n *Coordinates are in same order as the factors\n *Indices starts at 0";
     }
 }
