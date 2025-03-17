@@ -12,7 +12,7 @@ public class GridSolver {
         if(!checkIfGridIsValid(grid)) {
             throw new IllegalArgumentException("Grid is not valid");
         }
-        if(kConsecutive == 0) {
+        if(kConsecutive <= 0) {
             throw new IllegalArgumentException("kConsecutive should be greater than 0");
         }
         if(!checkIfConsecutiveNumbersLessOrEqualDim(grid, kConsecutive)) {
