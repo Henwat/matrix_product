@@ -17,6 +17,6 @@ The **GridAnalyzer** package contains classes to parse and find the largest prod
 
 <img src="illustration.png" alt="How consecutive numbers are calculated" width="350" height="250" />
 
-Image: The four directions the product of *k* consecutive numbers are calculated.
+Image: The four directions in which the product of *k* consecutive numbers are calculated.
 
 
