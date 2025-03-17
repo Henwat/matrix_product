@@ -40,7 +40,7 @@ public class Main {
         //Solving the task
         Path gridPath4 = Paths.get("src/main/resources/grid.txt");
         int kConsecutiveNumbers4 = 4;
-        int[][] grid4 = GridParser.parse(gridPath2);
+        int[][] grid4 = GridParser.parse(gridPath4);
 
         List<GridProduct> product4 = GridSolver.solve(grid4, kConsecutiveNumbers4);
         System.out.println("\nThe largest product of the puzzle-matrix is:");
