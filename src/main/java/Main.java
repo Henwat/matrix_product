@@ -1,6 +1,6 @@
-import GridAnalyzer.GridParser;
-import GridAnalyzer.GridProduct;
-import GridAnalyzer.GridSolver;
+import gridanalyzer.GridParser;
+import gridanalyzer.GridProduct;
+import gridanalyzer.GridSolver;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;

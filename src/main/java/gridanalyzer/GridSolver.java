@@ -1,4 +1,4 @@
-package GridAnalyzer;
+package gridanalyzer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class GridSolver {
         for (int row = 0; row < rowDim; row++) {
             for (int col = 0; col < colDim; col++) {
 
-                //Horizontal product of numConsecutive numbers
+                //Horizontal product of kConsecutive numbers
                 if (col + kConsecutive - 1 < colDim) {
                     long currentProd = 1;
                     int[][] coordinates = new int[kConsecutive][2];
@@ -53,7 +53,7 @@ public class GridSolver {
                 }
 
 
-                //Vertical product of numConsecutive numbers
+                //Vertical product of kConsecutive numbers
                 if(row + kConsecutive - 1 < rowDim) {
                     long currentProd = 1;
                     int[][] coordinates = new int[kConsecutive][2];
@@ -76,7 +76,7 @@ public class GridSolver {
                 }
 
 
-                //NW to SE product of numConsecutive numbers
+                //NW to SE product of kConsecutive numbers
                 if((col + kConsecutive - 1 < colDim) && (row + kConsecutive - 1 < rowDim)) {
                     long currentProd = 1;
                     int[][] coordinates = new int[kConsecutive][2];
@@ -99,7 +99,7 @@ public class GridSolver {
                 }
 
 
-                //NE to SW product of numConsecutive numbers
+                //NE to SW product of kConsecutive numbers
                 if((col - kConsecutive + 1 >= 0) && (row + kConsecutive - 1 < rowDim)) {
                     long currentProd = 1;
                     int[][] coordinates = new int[kConsecutive][2];

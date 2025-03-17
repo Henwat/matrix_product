@@ -1,4 +1,4 @@
-package GridAnalyzer;
+package gridanalyzer;
 
 import java.util.Arrays;
 

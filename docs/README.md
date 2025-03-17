@@ -1,6 +1,6 @@
-## GridAnalyzer 
+## gridanalyzer 
 
-The **GridAnalyzer** package contains classes to parse and find the largest product of *k* consecutive numbers in a square matrix.
+The **gridanalyzer** package contains classes to parse and find the largest product of *k* consecutive numbers in a square matrix.
   
 - *GridParser* parse a .txt-file containing an *n* x *n* matrix. 
   - The static method *parse()* takes a Path-object as argument pointing to the file containing the matrix, and returns the matrix as an int[][].
